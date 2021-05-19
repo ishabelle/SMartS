@@ -9,3 +9,4 @@ db = SQLAlchemy(app)
 
 
 from SMartS import messages
+from SMartS import models
