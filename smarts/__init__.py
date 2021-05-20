@@ -18,8 +18,10 @@ def create_app(config_class=Config):
     from smarts.commands import db_manage_bp
     from smarts.errors import errors_bp
     from smarts.messages import messages_bp
+    from smarts.auth import auth_bp
     app.register_blueprint(db_manage_bp)
     app.register_blueprint(errors_bp)
     app.register_blueprint(messages_bp, url_prefix='/api/v1')
+    app.register_blueprint(auth_bp, url_prefix='/api/v1/auth')
 
     return app
