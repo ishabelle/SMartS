@@ -1,1 +1,1 @@
-web: gunicorn app:smarts
+web: gunicorn app:app
