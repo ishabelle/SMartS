@@ -60,6 +60,10 @@ def update_message(args: dict, message_id: int):
 
 @app.route('/api/v1/messages/<int:message_id>', methods=['DELETE'])
 def delete_message(message_id: int):
+    message = Message.query.get_or_404(message_id, description=f'Message with id {message_id} not found')
+    db.session.delete(message)
+    db.session.commit()
+
     return jsonify({
         'success': True,
         'data': f'Message with ID {message_id} has been deleted'
