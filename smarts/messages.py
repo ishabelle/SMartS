@@ -1,12 +1,17 @@
 from smarts import app
 from flask import jsonify
+from smarts.models import Message, MessageSchema
 
 
 @app.route('/api/v1/messages', methods=['GET'])
 def get_messages():
+    messages = Message.query.all()
+    message_schema = MessageSchema(many=True)
+
     return jsonify({
         'success': True,
-        'data': 'Get all messages'
+        'data': message_schema.dump(messages),
+        'number_of_records': len(messages)
     })
 
 
