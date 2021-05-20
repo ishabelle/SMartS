@@ -1,4 +1,4 @@
-from smarts_app import app
+from smarts import app
 from flask import jsonify
 
 
