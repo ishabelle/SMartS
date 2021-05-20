@@ -6,7 +6,7 @@ from smarts.utils import validate_json_content_type
 from smarts.messages import messages_bp
 
 
-@messages_bp.route('/api/v1/messages', methods=['GET'])
+@messages_bp.route('/messages', methods=['GET'])
 def get_messages():
     messages = Message.query.all()
     message_schema = MessageSchema(many=True)
@@ -18,7 +18,7 @@ def get_messages():
     })
 
 
-@messages_bp.route('/api/v1/messages/<int:message_id>', methods=['GET'])
+@messages_bp.route('/messages/<int:message_id>', methods=['GET'])
 def get_message(message_id: int):
     message = Message.query.get_or_404(message_id, description=f'Message with id {message_id} not found')
 
@@ -28,7 +28,7 @@ def get_message(message_id: int):
     })
 
 
-@messages_bp.route('/api/v1/messages', methods=['POST'])
+@messages_bp.route('/messages', methods=['POST'])
 @validate_json_content_type
 @use_args(message_schema, error_status_code=400)
 def create_message(args: dict):
@@ -42,7 +42,7 @@ def create_message(args: dict):
     }), 201
 
 
-@messages_bp.route('/api/v1/messages/<int:message_id>', methods=['PUT'])
+@messages_bp.route('/messages/<int:message_id>', methods=['PUT'])
 @validate_json_content_type
 @use_args(message_schema, error_status_code=400)
 def update_message(args: dict, message_id: int):
@@ -59,7 +59,7 @@ def update_message(args: dict, message_id: int):
     })
 
 
-@messages_bp.route('/api/v1/messages/<int:message_id>', methods=['DELETE'])
+@messages_bp.route('/messages/<int:message_id>', methods=['DELETE'])
 def delete_message(message_id: int):
     message = Message.query.get_or_404(message_id, description=f'Message with id {message_id} not found')
     db.session.delete(message)
