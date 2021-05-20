@@ -105,3 +105,13 @@ def test_create_message_ivalid_content_type(client, token, message):
     assert response.headers['Content-Type'] == 'application/json'
     assert response_data['success'] is False
     assert 'data' not in response_data
+
+
+def test_create_message_missing_token(client, message):
+    response = client.post('/api/v1/messages',
+                           json=message)
+    response_data = response.get_json()
+    assert response.status_code == 401
+    assert response.headers['Content-Type'] == 'application/json'
+    assert response_data['success'] is False
+    assert 'data' not in response_data
