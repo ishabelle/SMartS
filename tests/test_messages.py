@@ -26,7 +26,7 @@ def test_get_single_message(client, sample_data):
     assert response.headers['Content-Type'] == 'application/json'
     assert response_data['success'] is True
     assert response_data['data']['receiver'] == 'Lou'
-    assert response_data['data']['date'] == '25-10-2021'
+    assert response_data['data']['date'] == '25-10-2020'
     assert response_data['data']['text'] == 'Hey Lou, its Jon! Loved connecting with you. Enjoy Vegas!'
     assert response_data['data']['sender'] == 'John'
 
@@ -38,3 +38,26 @@ def test_get_single_message_not_found(client, sample_data):
     assert response.headers['Content-Type'] == 'application/json'
     assert response_data['success'] is False
     assert 'data' not in response_data
+
+
+def test_create_message(client, token, message):
+    response = client.post('/api/v1/messages',
+                           json=message,
+                           headers={
+                               'Authorization': f'Bearer {token}'
+                           })
+    response_data = response.get_json()
+    expected_result = {
+        'success': True,
+        'data': {
+            **message,
+            'id': 1,
+        }
+    }
+    assert response.headers['Content-Type'] == 'application/json'
+    assert response_data == expected_result
+
+    response = client.get('/api/v1/messages/1')
+    response_data = response.get_json()
+    assert response.headers['Content-Type'] == 'application/json'
+    assert response_data == expected_result
