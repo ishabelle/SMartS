@@ -9,6 +9,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+from smarts import messages
 from smarts import models
 from smarts.commands import db_manage_commands
 from smarts import errors
