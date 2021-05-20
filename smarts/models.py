@@ -31,7 +31,7 @@ class User(db.Model):
         return generate_password_hash(password)
 
     def generate_jwt(self) -> bytes:
-        payload= {
+        payload = {
             'user_id': self.id,
             'exp': datetime.utcnow() + timedelta(minutes=current_app.config.get('JWT_EXPIRED_MINUTES'))
         }
