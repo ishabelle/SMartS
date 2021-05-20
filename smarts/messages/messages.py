@@ -2,7 +2,7 @@ from smarts import db
 from flask import jsonify, request
 from smarts.models import Message, MessageSchema, message_schema
 from webargs.flaskparser import use_args
-from smarts.utils import validate_json_content_type
+from smarts.utils import validate_json_content_type, token_required
 from smarts.messages import messages_bp
 
 
@@ -29,9 +29,10 @@ def get_message(message_id: int):
 
 
 @messages_bp.route('/messages', methods=['POST'])
+@token_required
 @validate_json_content_type
 @use_args(message_schema, error_status_code=400)
-def create_message(args: dict):
+def create_message(user_id: str, args: dict):
     message = Message(**args)
     db.session.add(message)
     db.session.commit()
@@ -43,9 +44,10 @@ def create_message(args: dict):
 
 
 @messages_bp.route('/messages/<int:message_id>', methods=['PUT'])
+@token_required
 @validate_json_content_type
 @use_args(message_schema, error_status_code=400)
-def update_message(args: dict, message_id: int):
+def update_message(user_id: str, args: dict, message_id: int):
     message = Message.query.get_or_404(message_id, description=f'Message with id {message_id} not found')
     message.receiver = args['receiver']
     message.date = args['date']
@@ -60,7 +62,8 @@ def update_message(args: dict, message_id: int):
 
 
 @messages_bp.route('/messages/<int:message_id>', methods=['DELETE'])
-def delete_message(message_id: int):
+@token_required
+def delete_message(user_id: str, message_id: int):
     message = Message.query.get_or_404(message_id, description=f'Message with id {message_id} not found')
     db.session.delete(message)
     db.session.commit()
