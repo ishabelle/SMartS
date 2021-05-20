@@ -1,11 +1,12 @@
-from smarts import app, db
+from smarts import db
 from smarts.models import Message
 from pathlib import Path
 import json
 from datetime import datetime
+from smarts.commands import db_manage_bp
 
 
-@app.cli.group()
+@db_manage_bp.cli.group()
 def db_manage():
     """ Database management commands """
     pass
@@ -14,8 +15,9 @@ def db_manage():
 @db_manage.command()
 def add_data():
     """ Add sample data to database """
+
     try:
-        messages_path = Path(__file__).parent / 'samples' / 'messages.json'
+        messages_path = Path(__file__).parent.parent / 'samples' / 'messages.json'
         with open(messages_path) as file:
             data_json = json.load(file)
         for item in data_json:
@@ -31,6 +33,7 @@ def add_data():
 @db_manage.command()
 def remove_data():
     """ Remove all data from the database """
+
     try:
         db.session.execute('TRUNCATE TABLE messages')
         db.session.commit()
