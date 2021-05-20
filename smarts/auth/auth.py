@@ -1,5 +1,5 @@
 from smarts.auth import auth_bp
-from smarts.utils import validate_json_content_type
+from smarts.utils import validate_json_content_type, token_required
 from webargs.flaskparser import use_args
 from smarts.models import User, user_schema, UserSchema
 from flask import abort, jsonify
@@ -45,4 +45,15 @@ def login(args: dict):
     return jsonify({
         'success': True,
         'token': token.decode()
+    })
+
+
+@auth_bp.route('/me', methods=['GET'])
+@token_required
+def get_current_user(user_id: str):
+    user = User.query.get_or_404(user_id, description=f'User with ID {user_id} not found')
+
+    return jsonify({
+        'success': True,
+        'data': user_schema.dump(user)
     })
