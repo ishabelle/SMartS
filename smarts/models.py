@@ -1,6 +1,9 @@
 from smarts import db
 from marshmallow import Schema, fields, validate, validates, ValidationError
-from datetime import datetime
+from datetime import datetime, timedelta
+from werkzeug.security import generate_password_hash
+import jwt
+from flask import current_app
 
 
 class Message(db.Model):
@@ -22,6 +25,17 @@ class User(db.Model):
     email = db.Column(db.String(255), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     creation_date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    @staticmethod
+    def generate_hashed_password(password: str) -> str:
+        return generate_password_hash(password)
+
+    def generate_jwt(self) -> bytes:
+        payload= {
+            'user_id': self.id,
+            'exp': datetime.utcnow() + timedelta(minutes=current_app.config.get('JWT_EXPIRED_MINUTES'))
+        }
+        return jwt.encode(payload, current_app.config.get('SECRET_KEY'))
 
 
 class MessageSchema(Schema):
