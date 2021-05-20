@@ -61,3 +61,17 @@ def test_registration_already_used_username(client, user):
     assert response.headers['Content-Type'] == 'application/json'
     assert response_data['success'] is False
     assert 'token' not in response_data
+
+
+def test_registration_already_used_email(client, user):
+    response = client.post('/api/v1/auth/register',
+                           json={
+                               'username': 'new_user',
+                               'password': 'qwerty',
+                               'email': user['email']
+                           })
+    response_data = response.get_json()
+    assert response.status_code == 409
+    assert response.headers['Content-Type'] == 'application/json'
+    assert response_data['success'] is False
+    assert 'token' not in response_data
