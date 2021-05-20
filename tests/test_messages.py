@@ -92,3 +92,16 @@ def test_create_message_ivalid_data(client, token, data, missing_field):
     assert 'data' not in response_data
     assert missing_field in response_data['message']
     assert 'Missing data for required field.' in response_data['message'][missing_field]
+
+
+def test_create_message_ivalid_content_type(client, token, message):
+    response = client.post('/api/v1/messages',
+                           data=message,
+                           headers={
+                               'Authorization': f'Bearer {token}'
+                           })
+    response_data = response.get_json()
+    assert response.status_code == 415
+    assert response.headers['Content-Type'] == 'application/json'
+    assert response_data['success'] is False
+    assert 'data' not in response_data
