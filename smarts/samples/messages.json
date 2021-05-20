@@ -2,7 +2,7 @@
   {
     "receiver": "Lou",
     "date": "25-10-2021",
-    "text": "Hey Lou, it’s Jon! Loved connecting with you. Enjoy Vegas!",
+    "text": "Hey Lou, its Jon! Loved connecting with you. Enjoy Vegas!",
     "sender": "John"
   },
   {
@@ -28,5 +28,41 @@
     "date": "21-11-2018",
     "text": "Good morning EY marketing! For the team picnic tomorrow please reply with what you’re bringing.",
     "sender": "Joe"
+  },
+  {
+    "receiver": "Matt",
+    "date": "25-11-2019",
+    "text": "Thanks for signing up for updates.",
+    "sender": "Jenny"
+  },
+  {
+    "receiver": "Hugo",
+    "date": "20-08-2021",
+    "text": "Join us for a live webinar on 5/1 at 4 pm.",
+    "sender": "Ron"
+  },
+  {
+    "receiver": "Max",
+    "date": "28-08-2011",
+    "text": "Everything’s going to be amazing.",
+    "sender": "Rio"
+  },
+  {
+    "receiver": "Milo",
+    "date": "23-08-2018",
+    "text": "You’re booked! See you on 3/17/2020 at 3:00 pm.",
+    "sender": "Kam"
+  },
+  {
+    "receiver": "Ivo",
+    "date": "23-07-2019",
+    "text": "Team, please be aware of building maintenance.",
+    "sender": "Kim"
+  },
+   {
+    "receiver": "Tim",
+    "date": "13-02-2021",
+    "text": "Your balance of $100 will be paid by card on 8/1/2020.",
+    "sender": "Kyle"
   }
 ]
