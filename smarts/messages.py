@@ -42,10 +42,19 @@ def create_message(args: dict):
 
 
 @app.route('/api/v1/messages/<int:message_id>', methods=['PUT'])
-def update_message(message_id: int):
+@validate_json_content_type
+@use_args(message_schema, error_status_code=400)
+def update_message(args: dict, message_id: int):
+    message = Message.query.get_or_404(message_id, description=f'Message with id {message_id} not found')
+    message.receiver = args['receiver']
+    message.date = args['date']
+    message.text = args['text']
+    message.sender = args['sender']
+    db.session.commit()
+
     return jsonify({
         'success': True,
-        'data': f'Message with ID {message_id} has been updated'
+        'data': message_schema.dump(message)
     })
 
 
