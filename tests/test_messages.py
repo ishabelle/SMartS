@@ -17,3 +17,15 @@ def test_get_messages(client, sample_data):
     assert response.headers['Content-Type'] == 'application/json'
     assert response_data['success'] is True
     assert len(response_data['data'])
+
+
+def test_get_single_message(client, sample_data):
+    response = client.get('/api/v1/messages/1')
+    response_data = response.get_json()
+    assert response.status_code == 200
+    assert response.headers['Content-Type'] == 'application/json'
+    assert response_data['success'] is True
+    assert response_data['data']['receiver'] == 'Lou'
+    assert response_data['data']['date'] == '25-10-2021'
+    assert response_data['data']['text'] == 'Hey Lou, its Jon! Loved connecting with you. Enjoy Vegas!'
+    assert response_data['data']['sender'] == 'John'
