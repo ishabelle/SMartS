@@ -20,3 +20,6 @@ class MessageSchema(Schema):
     date = fields.Date('%d-%m-%Y')
     text = fields.String()
     sender = fields.String()
+
+
+message_schema = MessageSchema()
