@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_get_messages_no_records(client):
     response = client.get('/api/v1/messages')
     expected_result = {
@@ -61,3 +64,31 @@ def test_create_message(client, token, message):
     response_data = response.get_json()
     assert response.headers['Content-Type'] == 'application/json'
     assert response_data == expected_result
+
+
+@pytest.mark.parametrize(
+    'data,missing_field',
+    [
+        ({'receiver': 'Lou', 'date': '25-10-2020', 'text': 'Hey Lou, its Jon! Loved connecting with you. Enjoy Vegas!'},
+         'sender'),
+        ({'date': '25-10-2020', 'text': 'Hey Lou, its Jon! Loved connecting with you. Enjoy Vegas!', 'sender': 'John'},
+         'receiver'),
+        ({'receiver': 'Lou', 'text': 'Hey Lou, its Jon! Loved connecting with you. Enjoy Vegas!', 'sender': 'John'},
+         'date'),
+        ({'receiver': 'Lou', 'date': '25-10-2020', 'sender': 'John'},
+         'text'),
+    ]
+)
+def test_create_message_ivalid_data(client, token, data, missing_field):
+    response = client.post('/api/v1/messages',
+                           json=data,
+                           headers={
+                               'Authorization': f'Bearer {token}'
+                           })
+    response_data = response.get_json()
+    assert response.status_code == 400
+    assert response.headers['Content-Type'] == 'application/json'
+    assert response_data['success'] is False
+    assert 'data' not in response_data
+    assert missing_field in response_data['message']
+    assert 'Missing data for required field.' in response_data['message'][missing_field]
