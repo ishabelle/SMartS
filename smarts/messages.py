@@ -1,6 +1,6 @@
 from smarts import app
 from flask import jsonify
-from smarts.models import Message, MessageSchema
+from smarts.models import Message, MessageSchema, message_schema
 
 
 @app.route('/api/v1/messages', methods=['GET'])
@@ -17,9 +17,11 @@ def get_messages():
 
 @app.route('/api/v1/messages/<int:message_id>', methods=['GET'])
 def get_message(message_id: int):
+    message = Message.query.get_or_404(message_id, description=f'Message with id {message_id} not found')
+
     return jsonify({
         'success': True,
-        'data': f'Get message with ID {message_id}'
+        'data': message_schema.dump(message)
     })
 
 
