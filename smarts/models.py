@@ -37,4 +37,13 @@ class MessageSchema(Schema):
             raise ValidationError(f'Date must be lower than {datetime.now().date()}')
 
 
+class UserSchema(Schema):
+    id = fields.Integer(dump_only=True)
+    username = fields.String(required=True, validate=validate.Length(max=255))
+    email = fields.Email(required=True)
+    password = fields.String(required=True, load_only=True, validate=validate.Length(min=6, max=255))
+    creation_date = fields.DateTime(dump_only=True)
+
+
 message_schema = MessageSchema()
+user_schema = UserSchema()
