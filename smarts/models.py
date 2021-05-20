@@ -1,4 +1,5 @@
 from smarts import db
+from marshmallow import Schema, fields
 
 
 class Message(db.Model):
@@ -11,3 +12,11 @@ class Message(db.Model):
 
     def __repr__(self):
         return f'<{self.__class__.__name__}>: Message with ID {self.id} posted on {self.date} by {self.sender} '
+
+
+class MessageSchema(Schema):
+    id = fields.Integer()
+    receiver = fields.String()
+    date = fields.Date('%d-%m-%Y')
+    text = fields.String()
+    sender = fields.String()
