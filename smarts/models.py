@@ -11,7 +11,7 @@ class Message(db.Model):
     sender = db.Column(db.String(50), nullable=True)
 
     def __repr__(self):
-        return f'<{self.__class__.__name__}>: Message with ID {self.id} posted on {self.date} by {self.sender} '
+        return f'<{self.__class__.__name__}>: Message posted on {self.date} by {self.sender} '
 
 
 class MessageSchema(Schema):
