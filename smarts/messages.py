@@ -1,6 +1,7 @@
-from smarts import app
-from flask import jsonify
+from smarts import app, db
+from flask import jsonify, request
 from smarts.models import Message, MessageSchema, message_schema
+from webargs.flaskparser import use_args
 
 
 @app.route('/api/v1/messages', methods=['GET'])
@@ -26,10 +27,15 @@ def get_message(message_id: int):
 
 
 @app.route('/api/v1/messages', methods=['POST'])
-def create_message():
+@use_args(message_schema)
+def create_message(args: dict):
+    message = Message(**args)
+    db.session.add(message)
+    db.session.commit()
+
     return jsonify({
         'success': True,
-        'data': 'New message has been created'
+        'data': message_schema.dump(message)
     }), 201
 
 
