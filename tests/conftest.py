@@ -46,3 +46,13 @@ def token(client, user):
 def sample_data(app):
     runner = app.test_cli_runner()
     runner.invoke(add_data)
+
+
+@pytest.fixture
+def message():
+    return {
+        "receiver": "Lou",
+        "date": "25-10-2020",
+        "text": "Hey Lou, its Jon! Loved connecting with you. Enjoy Vegas!",
+        "sender": "John"
+    }
