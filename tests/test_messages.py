@@ -29,3 +29,12 @@ def test_get_single_message(client, sample_data):
     assert response_data['data']['date'] == '25-10-2021'
     assert response_data['data']['text'] == 'Hey Lou, its Jon! Loved connecting with you. Enjoy Vegas!'
     assert response_data['data']['sender'] == 'John'
+
+
+def test_get_single_message_not_found(client, sample_data):
+    response = client.get('/api/v1/messages/25')
+    response_data = response.get_json()
+    assert response.status_code == 404
+    assert response.headers['Content-Type'] == 'application/json'
+    assert response_data['success'] is False
+    assert 'data' not in response_data
