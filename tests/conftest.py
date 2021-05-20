@@ -19,3 +19,14 @@ def app():
 def client(app):
     with app.test_client() as client:
         yield client
+
+
+@pytest.fixture
+def user(client):
+    user = {
+        'username': 'test',
+        'password': 'qwerty',
+        'email': 'test@gmail.com'
+    }
+    client.post('/api/v1/auth/register', json=user)
+    return user
