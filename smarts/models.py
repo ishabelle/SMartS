@@ -1,4 +1,4 @@
-from SMartS import db
+from smarts import db
 
 
 class Message(db.Model):
