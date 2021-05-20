@@ -2,6 +2,7 @@ from smarts import app, db
 from flask import jsonify, request
 from smarts.models import Message, MessageSchema, message_schema
 from webargs.flaskparser import use_args
+from smarts.utils import validate_json_content_type
 
 
 @app.route('/api/v1/messages', methods=['GET'])
@@ -27,7 +28,8 @@ def get_message(message_id: int):
 
 
 @app.route('/api/v1/messages', methods=['POST'])
-@use_args(message_schema)
+@validate_json_content_type
+@use_args(message_schema, error_status_code=400)
 def create_message(args: dict):
     message = Message(**args)
     db.session.add(message)
