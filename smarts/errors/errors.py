@@ -22,6 +22,11 @@ def not_found_error(err):
     return ErrorResponse(err.description, 404).to_response()
 
 
+@errors_bp.app_errorhandler(401)
+def unauthorized_error(err):
+    return ErrorResponse(err.description, 401).to_response()
+
+
 @errors_bp.app_errorhandler(409)
 def conflict_error(err):
     return ErrorResponse(err.description, 409).to_response()
