@@ -90,3 +90,12 @@ def test_get_current_user(client, user, token):
     assert response_data['data']['email'] == user['email']
     assert 'id' in response_data['data']
     assert 'creation_date' in response_data['data']
+
+
+def test_get_current_user_missing_token(client):
+    response = client.get('/api/v1/auth/me')
+    response_data = response.get_json()
+    assert response.status_code == 401
+    assert response.headers['Content-Type'] == 'application/json'
+    assert response_data['success'] is False
+    assert 'data' not in response_data
