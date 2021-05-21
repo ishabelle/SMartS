@@ -58,4 +58,4 @@ python -m pytest tests/
 | Python 3.9.5 | Flask 2.0.0 | Alembic 1.6.2 |
 |:---:|:---:|:---:|
 | SQLAlchemy 1.4.15 | PyJWT 1.7.1 | Pytest 6.2.4 |
-|MySQL| AWS| Postman|
+| MySQL | AWS | Postman |
