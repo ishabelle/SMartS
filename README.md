@@ -11,7 +11,7 @@ It supports messages resources including authentication(JWT Token).
 
 The application was deployed using the AWS Elastic Beanstalk service.
 
-The documentation can be found in [here](https://documenter.getpostman.com/view/15826658/TzXtGfLB#bb0de710-8b0b-4303-bd26-eeba69019dd4?raw=true) - with methods and URLs.
+The documentation can be found [here](https://documenter.getpostman.com/view/15826658/TzXtGfLB#bb0de710-8b0b-4303-bd26-eeba69019dd4?raw=true) - with methods and URLs.
 
 ![documentation](https://github.com/ishabelle/SMartS/blob/main/info-files/documentation.JPG?raw=true)
 
