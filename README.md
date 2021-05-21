@@ -17,31 +17,31 @@ The documentation can be found in [here](https://documenter.getpostman.com/view/
 
 ## SETUP
 
-- Clone repository
-- Create database and user
-- Rename .env.example to `.env` and set unique parameters:
+- Cloning repository
+- Creating database and user
+- Renaming .env.example to `.env` and set unique parameters:
 ```angular2html
 # SQLALCHEMY_DATABASE_URI MySQL trmplate
 SQLALCHEMY_DATABASE_URI = mysql+pymysql://<db_user>:<db_password>@<db_host>/<db_name>?charset=utf8mb4
 ```
-- Create a virtual environment
+- Creating a virtual environment
 ```angular2html
 python -m venv venv
 ```
-- Install packages from `requirements.txt`
+- Installing packages from `requirements.txt`
 ```angular2html
 pip install -r requirements.txt
 ```
-- Migrate database
+- Migrating database
 ```angular2html
 flask db upgrade
 ```
-- Run command
+- Running command
 ```angular2html
 flask run
 ```
 ### HINT
-Import / delete exampl data from `smarts\samples`:
+Importing / deleting examples data from `smarts\samples`:
 ```angular2html
 # import data
 flask db-manage add-data
@@ -50,7 +50,7 @@ flask db-manage add-data
 flask db-manage remove-data
 ```
 ### TESTS
-In order to execute test located in `tests/` run the command:
+In order to execute test located in `tests/` running the command:
 ```angular2html
 python -m pytest tests/
 ```
