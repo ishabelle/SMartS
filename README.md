@@ -1,5 +1,4 @@
 # SMartS - REST API
-___________________________
 Backend API for managing messages - saving, returning saved, editing and deleting short texts (up to 160 characters).
 
 It supports messages resources including authentication(JWT Token).
@@ -14,10 +13,9 @@ The application was deployed using the AWS Elastic Beanstalk service.
 
 The documentation can be found in `documentation.html` or [here](https://documenter.getpostman.com/view/15826658/TzXtGfLB#bb0de710-8b0b-4303-bd26-eeba69019dd4).
 
-![documentation](https://github.com/ishabelle/SMartS/blob/main/documentation.jpg?raw=true)
+![documentation](https://github.com/ishabelle/SMartS/blob/main/info-files/documentation.JPG?raw=true)
 
 ## SETUP
-___________________________
 
 - Clone repository
 - Create database and user
@@ -43,7 +41,6 @@ flask db upgrade
 flask run
 ```
 ### HINT
-___________________________
 Import / delete exampl data from `smarts\samples`:
 ```angular2html
 # import data
@@ -53,7 +50,6 @@ flask db-manage add-data
 flask db-manage remove-data
 ```
 ### TESTS
-___________________________
 In order to execute test located in `tests/` run the command:
 ```angular2html
 python -m pytest tests/
