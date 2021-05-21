@@ -11,7 +11,7 @@ It supports messages resources including authentication(JWT Token).
 
 The application was deployed using the AWS Elastic Beanstalk service.
 
-The documentation can be found in `documentation.html` or [here](https://documenter.getpostman.com/view/15826658/TzXtGfLB#bb0de710-8b0b-4303-bd26-eeba69019dd4?raw=true).
+The documentation can be found in `documentation.html` or [here](https://documenter.getpostman.com/view/15826658/TzXtGfLB#bb0de710-8b0b-4303-bd26-eeba69019dd4?raw=true) - with methods and URLs.
 
 ![documentation](https://github.com/ishabelle/SMartS/blob/main/info-files/documentation.JPG?raw=true)
 
@@ -19,7 +19,7 @@ The documentation can be found in `documentation.html` or [here](https://documen
 
 - Clone repository
 - Create database and user
-- Rename .env.example to `.env` and set your parameters:
+- Rename .env.example to `.env` and set unique parameters:
 ```angular2html
 # SQLALCHEMY_DATABASE_URI MySQL trmplate
 SQLALCHEMY_DATABASE_URI = mysql+pymysql://<db_user>:<db_password>@<db_host>/<db_name>?charset=utf8mb4
@@ -54,3 +54,8 @@ In order to execute test located in `tests/` run the command:
 ```angular2html
 python -m pytest tests/
 ```
+### TECHNOLOGIES / TOOLS
+| Python 3.9.5 | Flask 2.0.0 | Alembic 1.6.2 |
+|:---:|:---:|:---:|
+| SQLAlchemy 1.4.15 | PyJWT 1.7.1 | Pytest 6.2.4 |
+|MySQL| AWS| Postman|
